@@ -1,26 +1,23 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/google/uuid"
 	_ "github.com/sakirsensoy/genv/dotenv/autoload"
 
+	"github.com/kpango/glg"
+
+	"github.com/dannegm/spendzer-service/api"
 	"github.com/dannegm/spendzer-service/config"
-	item "github.com/dannegm/spendzer-service/domain/item"
-	itemService "github.com/dannegm/spendzer-service/services/item"
 )
 
 func main() {
-	is, err := itemService.CreateItemService(config.Mongo.URI)
-
-	if err != nil {
-		fmt.Println(err)
+	if config.App.Debug {
+		glg.Get().SetLevel(glg.DEBG)
+	} else {
+		glg.Get().SetLevel(glg.FATAL)
 	}
 
-	newItem := item.Item{
-		ID:   uuid.New(),
-		Name: "Holi",
-	}
-	is.AddNewItem(newItem)
+	api.Setup(api.ServerConfig{
+		Port:  config.Server.Port,
+		Debug: config.App.Debug,
+	})
 }
