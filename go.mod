@@ -2,9 +2,8 @@ module github.com/dannegm/spendzer-service
 
 go 1.17
 
-require github.com/sakirsensoy/genv v1.0.1
-
 require (
+	github.com/sakirsensoy/genv v1.0.1
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/google/uuid v1.3.0 // indirect

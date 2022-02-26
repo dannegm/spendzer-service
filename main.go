@@ -28,8 +28,6 @@ func createItemService(connectionString string) (*ItemsService, error) {
 }
 
 func main() {
-	fmt.Println("Happy hacking!!")
-
 	is, err := createItemService(config.Mongo.URI)
 
 	if err != nil {
@@ -43,5 +41,3 @@ func main() {
 
 	is.Repository.Add(newItem)
 }
-
-// cannot use value in struct literal
