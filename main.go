@@ -8,15 +8,15 @@ import (
 
 	"github.com/dannegm/spendzer-service/config"
 	"github.com/dannegm/spendzer-service/domain/item"
-	"github.com/dannegm/spendzer-service/domain/item/mongo"
+	itemMongo "github.com/dannegm/spendzer-service/domain/item/mongo"
 )
 
 type ItemsService struct {
-	Repository *mongo.MongoRepository
+	Repository *itemMongo.MongoRepository
 }
 
 func createItemService(connectionString string) (*ItemsService, error) {
-	repo, err := mongo.NewRepository(context.Background(), connectionString)
+	repo, err := itemMongo.NewRepository(context.Background(), connectionString)
 
 	if err != nil {
 		return &ItemsService{}, err
