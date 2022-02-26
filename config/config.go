@@ -1,6 +1,10 @@
 package config
 
-import "github.com/sakirsensoy/genv"
+import (
+	"time"
+
+	"github.com/sakirsensoy/genv"
+)
 
 type appConfig struct {
 	Debug  bool
@@ -21,9 +25,13 @@ var Server = &serverConfig{
 }
 
 type mongoConfig struct {
-	URI string
+	URI      string
+	Database string
+	Timeout  time.Duration
 }
 
 var Mongo = &mongoConfig{
-	URI: genv.Key("MONGO_URI").String(),
+	URI:      genv.Key("MONGO_URI").String(),
+	Database: genv.Key("MONGO_DATABASE").Default("spendzer").String(),
+	Timeout:  time.Duration(genv.Key("MONGO_TIMEOUT").Default(10).Int()),
 }

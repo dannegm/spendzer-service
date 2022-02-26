@@ -15,3 +15,8 @@ spendzer
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Config Files
+.env
+.env.local
+.env.dev
