@@ -7,7 +7,6 @@ import (
 )
 
 var (
-	// ErrInvalidItem is returned when the Item is not valid
 	ErrInvalidItem = errors.New("Is not a valid Item")
 )
 
@@ -17,12 +16,10 @@ type Item struct {
 }
 
 func NewItem(name string) (Item, error) {
-	// Validate that the Name is not empty
 	if name == "" {
 		return Item{}, ErrInvalidItem
 	}
 
-	// Create an item and initialize all the values to avoid nil pointer exceptions
 	return Item{
 		ID:   uuid.New(),
 		Name: name,
