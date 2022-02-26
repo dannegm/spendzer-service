@@ -1,43 +1,26 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
+	"github.com/google/uuid"
 	_ "github.com/sakirsensoy/genv/dotenv/autoload"
 
 	"github.com/dannegm/spendzer-service/config"
-	"github.com/dannegm/spendzer-service/domain/item"
-	itemRepositories "github.com/dannegm/spendzer-service/domain/item/repositories"
+	item "github.com/dannegm/spendzer-service/domain/item"
+	itemService "github.com/dannegm/spendzer-service/services/item"
 )
 
-type ItemsService struct {
-	Repository *itemRepositories.MongoRepository
-}
-
-func createItemService(connectionString string) (*ItemsService, error) {
-	repo, err := itemRepositories.NewRepository(context.Background(), connectionString)
-
-	if err != nil {
-		return &ItemsService{}, err
-	}
-
-	return &ItemsService{
-		Repository: repo,
-	}, nil
-}
-
 func main() {
-	is, err := createItemService(config.Mongo.URI)
+	is, err := itemService.CreateItemService(config.Mongo.URI)
 
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	newItem, err := item.NewItem("Test 001")
-	if err != nil {
-		fmt.Println(err)
+	newItem := item.Item{
+		ID:   uuid.New(),
+		Name: "Holi",
 	}
-
-	is.Repository.Add(newItem)
+	is.AddNewItem(newItem)
 }
