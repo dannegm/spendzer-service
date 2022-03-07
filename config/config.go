@@ -35,3 +35,11 @@ var Mongo = &mongoConfig{
 	Database: genv.Key("MONGO_DATABASE").Default("spendzer").String(),
 	Timeout:  time.Duration(genv.Key("MONGO_TIMEOUT").Default(10).Int()),
 }
+
+type securityConfig struct {
+	SALT int
+}
+
+var Security = &securityConfig{
+	SALT: genv.Key("MONGO_TIMEOUT").Default(14).Int(),
+}

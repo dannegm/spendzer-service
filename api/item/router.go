@@ -5,7 +5,7 @@ import (
 	"github.com/kpango/glg"
 )
 
-func MountRouter(app *gin.Engine) {
+func Router(app *gin.Engine) {
 	glg.Info("Item > Router")
 
 	items := app.Group("/items")
